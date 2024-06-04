@@ -125,7 +125,11 @@ if __name__ == "__main__":
         
     x_train, y_train = preprocess_data(train_csv_path)
     x_test, y_test = preprocess_data(test_csv_path)
-
+    print(x_train.shape)
+    print(y_train.shape)
+    print(x_train)
+    print(y_train)
+    
     #print(x_test)
     # DataLoaderの作成
     train_loader = create_dataloader(x_train, y_train)
