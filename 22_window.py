@@ -125,10 +125,10 @@ if __name__ == "__main__":
         
     x_train, y_train = preprocess_data(train_csv_path)
     x_test, y_test = preprocess_data(test_csv_path)
-    print(x_train.shape)
-    print(y_train.shape)
-    print(x_train)
-    print(y_train)
+    #print(x_train.shape)
+    #print(y_train.shape)
+    #print(x_train)
+    #print(y_train)
     
     #print(x_test)
     # DataLoaderの作成
@@ -196,16 +196,12 @@ if __name__ == "__main__":
                 
                 # 既存の手の座標を指定
                 # 予測結果の後に続く処理
+                print(y_test_batch)
                 ground_truth_landmarks = flatten_to_landmarks(y_test_batch[0])  # 修正
-                #ground_truth_landmarks = flatten_to_landmarks(y_test[sample_index])
+                #print("ground_truth_landmarks:", ground_truth_landmarks)
+                ####ground_truth_landmarks = flatten_to_landmarks(y_test[sample_index])
                 truth_landmarks = flatten_to_landmarks(x_test[sample_index])
-                
-                
-                
-                
                 sample_landmarks_x = flatten_to_landmarks(predicted_x[0])  # 予測結果を利用
-
-
 
 
                 # landmark_0 の x 座標と y 座標の差分を計算し、表示する
@@ -228,7 +224,9 @@ if __name__ == "__main__":
 
 
                 # ground_truth_landmarksとsample_landmarks_xをTensorに変換
+                #print("ground_truth_landmarks:", ground_truth_landmarks)
                 ground_truth_tensor = torch.tensor(ground_truth_landmarks, dtype=torch.float32)
+                #print("ground_truth_landmarks:", ground_truth_landmarks)
                 sample_landmarks_x_tensor = torch.tensor(sample_landmarks_x, dtype=torch.float32)
                 # MSELossを計算
                 loss = criterion(ground_truth_tensor, sample_landmarks_x_tensor)
@@ -237,6 +235,7 @@ if __name__ == "__main__":
             
                 # ground_truth_landmarksとcorrectedをTensorに変換
                 ground_truth_tensor = torch.tensor(ground_truth_landmarks, dtype=torch.float32)
+                #print("ground_truth_landmarks:", ground_truth_landmarks)
                 corrected_tensor = torch.tensor(corrected, dtype=torch.float32)
                 # MSELossを計算
                 loss = criterion(ground_truth_tensor, corrected_tensor)
@@ -257,6 +256,7 @@ if __name__ == "__main__":
 
                 # Ground Truthの手の線をプロット
                 for points in [[0, 1, 2, 3, 4], [0, 5, 6, 7, 8], [5, 9, 10, 11, 12], [9, 13, 14, 15, 16], [13, 17, 18, 19, 20], [0, 17]]:
+                    #print("ground_truth_landmarks:", ground_truth_landmarks)
                     x_points = [ground_truth_landmarks[i][0] for i in points]
                     y_points = [ground_truth_landmarks[i][1] for i in points]
                     ax.plot(x_points, y_points, linestyle='-', color='blue', linewidth=2)
