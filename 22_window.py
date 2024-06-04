@@ -179,24 +179,34 @@ if __name__ == "__main__":
             with torch.no_grad():
                 # 既存のモデルでx_testを予測
                 start_time = time.time()
+                print("x_test_batch:", x_test_batch)
                 predicted_tensor_x = model(x_test_batch)
+                print("predicted_tensor_x:", predicted_tensor_x)
                 predicted_x = predicted_tensor_x.cpu().numpy()
+                #print("predicted_x:", predicted_x)
                 processing_time_per_image = time.time() - start_time
                 #print(f'処理時間_2: {processing_time_per_image:.6f} 秒')
-
+                
                 # 新しいモデルのインスタンスを作成
                 new_model = Net()
                 #new_model.load_state_dict(torch.load('your_model.pth'))
                 new_model.load_state_dict(torch.load('hanbetu_all.pth'))
                 new_model.to(device)
                 new_model.eval()
-
+                
                 # 既存の手の座標を指定
                 # 予測結果の後に続く処理
                 ground_truth_landmarks = flatten_to_landmarks(y_test_batch[0])  # 修正
                 #ground_truth_landmarks = flatten_to_landmarks(y_test[sample_index])
                 truth_landmarks = flatten_to_landmarks(x_test[sample_index])
+                
+                
+                
+                
                 sample_landmarks_x = flatten_to_landmarks(predicted_x[0])  # 予測結果を利用
+
+
+
 
                 # landmark_0 の x 座標と y 座標の差分を計算し、表示する
                 x_difference = y_test[sample_index][0] - predicted_x[0][0]
