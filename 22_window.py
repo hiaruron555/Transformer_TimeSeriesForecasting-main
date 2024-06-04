@@ -179,9 +179,9 @@ if __name__ == "__main__":
             with torch.no_grad():
                 # 既存のモデルでx_testを予測
                 start_time = time.time()
-                print("x_test_batch:", x_test_batch)
+                #print("x_test_batch:", x_test_batch)
                 predicted_tensor_x = model(x_test_batch)
-                print("predicted_tensor_x:", predicted_tensor_x)
+                #print("predicted_tensor_x:", predicted_tensor_x)
                 predicted_x = predicted_tensor_x.cpu().numpy()
                 #print("predicted_x:", predicted_x)
                 processing_time_per_image = time.time() - start_time
