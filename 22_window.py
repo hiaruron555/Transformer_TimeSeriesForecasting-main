@@ -174,6 +174,7 @@ if __name__ == "__main__":
             # ウィンドウ内のテストサンプルを取得
             x_test_batch = torch.tensor(x_test[sample_index:sample_index+window_size], dtype=torch.float32).unsqueeze(1).to(device)
             y_test_batch = torch.tensor(y_test[sample_index:sample_index+window_size], dtype=torch.float32).to(device)
+            np.savetxt('y_test_batch_moto', y_test_batch, delimiter=',', fmt='%f')
             print(sample_index+1)
 
             with torch.no_grad():
@@ -196,8 +197,9 @@ if __name__ == "__main__":
                 
                 # 既存の手の座標を指定
                 # 予測結果の後に続く処理
-                print(y_test_batch)
+                #print(y_test_batch)
                 ground_truth_landmarks = flatten_to_landmarks(y_test_batch[0])  # 修正
+                np.savetxt('ground_truth_landmarks_moto', ground_truth_landmarks, delimiter=',', fmt='%f')
                 #print("ground_truth_landmarks:", ground_truth_landmarks)
                 ####ground_truth_landmarks = flatten_to_landmarks(y_test[sample_index])
                 truth_landmarks = flatten_to_landmarks(x_test[sample_index])
