@@ -110,14 +110,15 @@ if __name__ == "__main__":
     #train_csv_path = '/home/iwata/Downloads/hand_all/2_19_hand_choki_only.csv'
     #train_csv_path = '/home/iwata/Downloads/hand_all/hand_300.csv'
     #train_csv_path = '/home/iwata/Downloads/hand_all/hand_300.csv'
+    #test_csv_path = 'test_10/choki_test_10/choki_test.csv'
 
     #test_csv_path = '/home/iwata/Downloads/test_5/gu_test_5/gu_test.csv'
-    test_csv_path = 'test_10/choki_test_10/choki_test.csv'
+    #test_csv_path = 'test_5/choki_test_5/choki_test.csv'
     #test_csv_path = '/home/iwata/Downloads/test_5/pa-_test_5/pa-_test.csv'
     
-    #test_csv_path = '/home/iwata/Downloads/test_4/gu_test_4/gu_train.csv'
-    #test_csv_path = '/home/iwata/Downloads/test_4/choki_test_4/choki_train.csv'
-    #test_csv_path = '/home/iwata/Downloads/test_4/pa-_test_4/pa-_train.csv'
+    #test_csv_path = 'test_3/gu_test_3/gu_train.csv'
+    #test_csv_path = 'test_3/choki_test_3/choki_train.csv'
+    test_csv_path = 'test_3/pa-_test_3/pa-_train.csv'
     
     #a = gu
     #a = choki
@@ -152,7 +153,7 @@ if __name__ == "__main__":
             scheduler.step()
 
         training_time = time.time() - start_time
-        #print(f'学習時間: {training_time:.2f} 秒')
+        print(f'学習時間: {training_time:.2f} 秒')
 
         # テストデータで評価
         model.eval()
@@ -162,7 +163,7 @@ if __name__ == "__main__":
             test_loss = criterion(test_outputs, torch.tensor(y_test, dtype=torch.float32).to(device))
             processing_time_per_image = time.time() - start_time
             #print(f'Test Loss: {test_loss.item():.4f}')
-            #print(f'処理時間_1: {processing_time_per_image:.6f} 秒')
+            print(f'処理時間_1: {processing_time_per_image:.6f} 秒')
 
 
     
@@ -275,13 +276,13 @@ if __name__ == "__main__":
                     x_points = [corrected[i][0] for i in points]
                     y_points = [corrected[i][1] for i in points]
                     ax.plot(x_points, y_points, linestyle='-', color='red', linewidth=2)
-                    
+                """"
                 # truth_landmarksの手の線をプロット
                 for points in [[0, 1, 2, 3, 4], [0, 5, 6, 7, 8], [5, 9, 10, 11, 12], [9, 13, 14, 15, 16], [13, 17, 18, 19, 20], [0, 17]]:
                     x_points = [truth_landmarks[i][0] for i in points]
                     y_points = [truth_landmarks[i][1] for i in points]
                     ax.plot(x_points, y_points, linestyle='-', color='green', linewidth=2)
-                
+                """
         
                 #plt.legend()
 
@@ -289,7 +290,7 @@ if __name__ == "__main__":
                 plt.savefig(save_path)
 
                 # 画像を表示
-                plt.show()
+                #plt.show()
 
 
 
